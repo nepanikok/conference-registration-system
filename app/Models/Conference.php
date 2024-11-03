@@ -15,6 +15,5 @@ class Conference extends Model
         'date',
         'time',
         'location',
-        // Pridėk kitus laukus, jei reikia
     ];
 }

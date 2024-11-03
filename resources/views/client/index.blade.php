@@ -1,31 +1,21 @@
 @extends('layouts.app')
 
+@section('title', 'Konferencijų Sąrašas')
+
 @section('content')
-<div class="container">
-    <h1>Planuojamos konferencijos</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Pavadinimas</th>
-                <th>Data</th>
-                <th>Veiksmai</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($conferences as $conference)
-                <tr>
-                    <td>{{ $conference->title }}</td>
-                    <td>{{ $conference->date }}</td>
-                    <td>
-                        <a href="{{ route('conference.show', $conference->id) }}" class="btn btn-info">Peržiūrėti</a>
-                        <form action="{{ route('registration.store', $conference->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-success">Registruotis</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+    <h1 class="mb-4">Konferencijų Sąrašas</h1>
+    <div class="row">
+        <!-- Konferencijos kortelė -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Konferencijos Pavadinimas 1</h5>
+                    <p class="card-text">Trumpas konferencijos aprašymas.</p>
+                    <button class="btn btn-primary me-2">Registracija</button>
+                    <a href="{{ route('conferences.show', ['id' => 1]) }}" class="btn btn-secondary">Peržiūra</a>
+                </div>
+            </div>
+        </div>
+        <!-- Kitos konferencijos kortelės galima kopijuoti -->
+    </div>
 @endsection

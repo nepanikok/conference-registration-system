@@ -13,7 +13,26 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <span class="nav-link disabled">Naudotojas: </span>
+                    <span class="nav-link disabled">Naudotojas: <?php
+
+                       // namespace App\Models;
+                        
+                        use Illuminate\Database\Eloquent\Factories\HasFactory;
+                        use Illuminate\Database\Eloquent\Model;
+                        
+                        class Conference extends Model
+                        {
+                            use HasFactory;
+                        
+                            protected $fillable = [
+                                'name',
+                                'description',
+                                'date',
+                                'time',
+                                'location',
+                                // Pridėk kitus laukus, jei reikia
+                            ];
+                        }?></span>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Logout</a>

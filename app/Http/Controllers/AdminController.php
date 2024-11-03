@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Conference; // Importuok modelį
+use App\Models\Conference; 
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
