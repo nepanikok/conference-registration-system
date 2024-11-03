@@ -18,14 +18,21 @@ Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.in
 Route::get('/employee/conferences/{id}', [EmployeeController::class, 'show'])->name('employee.conferences.show');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
-Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
-Route::get('/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
-Route::put('/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
-Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+Route::get('/admin/users', [AdminController::class, 'indexUsers'])->name('admin.users.index');
+Route::get('/admin/users/edit/{id}', [AdminController::class, 'editUser'])->name('admin.users.edit');
+Route::post('/admin/users/update/{id}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+
+Route::get('/admin/conferences', [AdminController::class, 'indexConferences'])->name('admin.conferences.index');
+Route::get('/admin/conferences/create', [AdminController::class, 'createConference'])->name('admin.conferences.create');
+Route::post('/admin/conferences/store', [AdminController::class, 'storeConference'])->name('admin.conferences.store');
+Route::get('/admin/conferences/edit/{id}', [AdminController::class, 'editConference'])->name('admin.conferences.edit');
+Route::post('/admin/conferences/update/{id}', [AdminController::class, 'updateConference'])->name('admin.conferences.update');
+Route::delete('/admin/conferences/delete/{id}', [AdminController::class, 'deleteConference'])->name('admin.conferences.delete');
 Route::get('/', function () {
     return view('welcome');
 
-});
+})->name('welcome');
+
 
 

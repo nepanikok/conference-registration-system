@@ -14,6 +14,6 @@
         <li class="list-group-item">Klientas 1</li>
         <li class="list-group-item">Klientas 2</li>
         <li class="list-group-item">Klientas 3</li>
-        <!-- Pridėkite daugiau klientų elementų, jei reikia -->
+    
     </ul>
 @endsection

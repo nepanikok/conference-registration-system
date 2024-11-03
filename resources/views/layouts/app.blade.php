@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <title>Konferencijų Registracijos Sistema</title>
+  
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -13,33 +13,26 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <span class="nav-link disabled">Naudotojas: <?php
-
-                       // namespace App\Models;
-                        
-                        use Illuminate\Database\Eloquent\Factories\HasFactory;
-                        use Illuminate\Database\Eloquent\Model;
-                        
-                        class Conference extends Model
-                        {
-                            use HasFactory;
-                        
-                            protected $fillable = [
-                                'name',
-                                'description',
-                                'date',
-                                'time',
-                                'location',
-                                // Pridėk kitus laukus, jei reikia
-                            ];
-                        }?></span>
+                    <a class="nav-link" href="{{ route('welcome') }}">Pagrindinis</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Logout</a>
+                    <a class="nav-link" href="{{ route('client.index') }}">Klientas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('employee.index') }}">Darbuotojas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.index') }}">Administratoriaus</a>
                 </li>
             </ul>
         </div>
+        <span class="nav-link disabled">|   Naudotojas: Deividas Kvetkauskas</span>
+       
+            <a class="nav-link disabled" href="#">Logout</a>
+      
     </nav>
+
+
 
     <main class="py-4">
         @yield('content')
@@ -50,9 +43,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        // Flatpickr initialization example
+        
         flatpickr("#datePicker", {
-            dateFormat: "Y-m-d",
+            dateFormat: "Y-m-d H:i",
             enableTime: true,
             time_24hr: true,
         });

@@ -10,6 +10,6 @@
             <p>Trumpas konferencijos aprašymas.</p>
             <a href="{{ route('employee.conferences.show', ['id' => 1]) }}" class="btn btn-secondary">Peržiūra</a>
         </li>
-        <!-- Galite pridėti daugiau konferencijų sąrašo elementų, jei reikia -->
+        
     </ul>
 @endsection

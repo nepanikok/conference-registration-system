@@ -8,6 +8,6 @@ class ClientController extends Controller
 {
     public function index()
     {
-        return view('client.index'); // Nukreipia į „Kliento posistemio“ puslapį
+        return view('client.index'); 
     }
 }

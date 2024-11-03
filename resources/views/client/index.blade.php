@@ -5,7 +5,7 @@
 @section('content')
     <h1 class="mb-4">Konferencijų Sąrašas</h1>
     <div class="row">
-        <!-- Konferencijos kortelė -->
+       
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
@@ -16,6 +16,6 @@
                 </div>
             </div>
         </div>
-        <!-- Kitos konferencijos kortelės galima kopijuoti -->
+        
     </div>
 @endsection
