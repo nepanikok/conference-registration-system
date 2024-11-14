@@ -16,6 +16,7 @@
             <li class="list-group-item"><a href="{{ route('client.index') }}" class="btn btn-primary">Kliento posistemis</a></li>
             <li class="list-group-item"><a href="{{ route('employee.index') }}" class="btn btn-primary">Darbuotojo posistemis</a></li>
             <li class="list-group-item"><a href="{{ route('admin.index') }}" class="btn btn-warning">Administratoriaus posistemis</a></li>
+            <li class="list-group-item"><a href="{{ route('register.form') }}" class="btn btn-warning">registracija</a></li>
         </ul>
     </div>
 </div>

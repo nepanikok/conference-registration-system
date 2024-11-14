@@ -26,10 +26,17 @@
                 </li>
             </ul>
         </div>
-        <span class="nav-link disabled">|   Naudotojas: Deividas Kvetkauskas</span>
+        @auth
+        <span class="navbar-text">| Sveiki, {{ Auth::user()->name }}</span>
        
-            <a class="nav-link disabled" href="#">Logout</a>
-      
+        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+            @csrf
+            <button type="submit" class="btn btn-link nav-link" style="display: inline; padding: 0;">Logout</button>
+        </form>
+            @else
+            <a class="nav-link" href="{{ route('register.form') }}">Login</a>
+            <a class="nav-link" href="{{ route('login') }}">register</a>
+        @endauth
     </nav>
 
 
