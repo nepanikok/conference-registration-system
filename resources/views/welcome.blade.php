@@ -8,6 +8,7 @@
         <h2>Naudotojo informacija:</h2>
         <p><strong>Vardas:</strong> Deividas Kvetkauskas</p>
         <p><strong>Grupė:</strong> [PIT-21-I-NT]</p>
+   
     </div>
 
     <div class="mt-4">

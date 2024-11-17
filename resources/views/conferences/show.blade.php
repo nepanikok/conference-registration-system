@@ -3,10 +3,23 @@
 @section('title', 'Konferencijos Peržiūra')
 
 @section('content')
-    <h1>Konferencijos Pavadinimas</h1>
-    <p><strong>Data:</strong> 2024-12-01</p>
-    <p><strong>Laikas:</strong> 10:00 - 17:00</p>
-    <p><strong>Vieta:</strong> Vilnius, Lietuva</p>
-    <p><strong>Aprašymas:</strong> Tai yra išsamesnis aprašymas apie konferenciją, kuri apima pagrindines temas, pranešėjus ir tikslus.</p>
-    <button class="btn btn-primary">Registracija</button>
+    <div class="container mt-5">
+        <h1>{{ $conference->title }}</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Data:</strong> {{ \Carbon\Carbon::parse($conference->date)->format('Y-m-d') }}</p>
+                <p><strong>Laikas:</strong> {{ \Carbon\Carbon::parse($conference->date)->format('H:i') }}</p>
+                <p><strong>Vieta:</strong> {{ $conference->address }}</p>
+            </div>
+            <div class="col-md-6">
+                <h4>Aprašymas:</h4>
+                <p>{{ $conference->description }}</p>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button class="btn btn-primary">Registracija</button>
+        </div>
+    </div>
 @endsection

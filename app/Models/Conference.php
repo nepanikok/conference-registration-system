@@ -16,4 +16,9 @@ class Conference extends Model
         'date',
         'address',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_conferences', 'conference_id', 'user_id');
+    }
 }

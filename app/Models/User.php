@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+
 
 class User extends Authenticatable
 {
@@ -47,8 +49,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function conferences()
+    {
+        return $this->belongsToMany(Conference::class, 'users_conferences', 'user_id', 'conference_id');
+    }
     public function roles()
 {
     return $this->belongsToMany(Role::class, 'users_roles');
 }
+
+
+
+
 }

@@ -3,13 +3,21 @@
 @section('title', 'Darbuotojo Posistemis - Konferencijų Sąrašas')
 
 @section('content')
-    <h1>Visų Įvykusių/Planuojamų Konferencijų Sąrašas</h1>
-    <ul class="list-group">
-        <li class="list-group-item">
-            <h5>Konferencijos Pavadinimas 1</h5>
-            <p>Trumpas konferencijos aprašymas.</p>
-            <a href="{{ route('employee.conferences.show', ['id' => 1]) }}" class="btn btn-secondary">Peržiūra</a>
-        </li>
+    <div class="container mt-5">
+        <h1>Visų Įvykusių/Planuojamų Konferencijų Sąrašas</h1>
         
-    </ul>
+        @if ($conferences->isEmpty())
+            <p>Nėra konferencijų, kurias būtų galima rodyti.</p>
+        @else
+            <ul class="list-group">
+                @foreach ($conferences as $conference)
+                    <li class="list-group-item mb-3">
+                        <h5>{{ $conference->title }}</h5>
+                        <p>{{ Str::limit($conference->description, 100) }}</p>
+                        <a href="{{ route('employee.conferences.show', ['id' => $conference->id]) }}" class="btn btn-secondary">Peržiūra</a>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
 @endsection

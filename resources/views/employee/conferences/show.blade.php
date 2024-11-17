@@ -3,17 +3,22 @@
 @section('title', 'Darbuotojo Posistemis - Konferencijos Peržiūra')
 
 @section('content')
-    <h1>Konferencijos Pavadinimas</h1>
-    <p><strong>Data:</strong> 2024-12-01</p>
-    <p><strong>Laikas:</strong> 10:00 - 17:00</p>
-    <p><strong>Vieta:</strong> Vilnius, Lietuva</p>
-    <p><strong>Aprašymas:</strong> Išsamus konferencijos aprašymas, apimantis pagrindines temas, pranešėjus ir tikslus.</p>
+    <div class="container mt-5">
+        <h1>{{ $conference->title }}</h1>
+        <p><strong>Data:</strong> {{ \Carbon\Carbon::parse($conference->date)->format('Y-m-d H:i') }}</p>
+        <p><strong>Vieta:</strong> {{ $conference->address }}</p>
+        <p><strong>Aprašymas:</strong> {{ $conference->description }}</p>
 
-    <h2>Užsiregistravę Klientai</h2>
-    <ul class="list-group">
-        <li class="list-group-item">Klientas 1</li>
-        <li class="list-group-item">Klientas 2</li>
-        <li class="list-group-item">Klientas 3</li>
-    
-    </ul>
+        <h2 class="mt-4">Užsiregistravę Klientai</h2>
+        @if ($conference->users->isEmpty())
+            <p>Nėra užsiregistravusių klientų.</p>
+        @else
+            <ul class="list-group">
+                @foreach ($conference->users as $user)
+                    <li class="list-group-item">{{ $user->name }} ({{ $user->email }})</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
 @endsection
+

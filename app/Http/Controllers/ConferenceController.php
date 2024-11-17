@@ -12,6 +12,15 @@ class ConferenceController extends Controller
         $conferences = Conference::all();
         return view('conferences.index', compact('conferences'));
     }
+    public function show($id)
+    {
+        // Rasti konferenciją pagal ID
+        $conference = Conference::findOrFail($id);
+        
+        // Perduoti konferenciją į peržiūros puslapį
+        return view('conferences.show', compact('conference'));
+    }
+    
     public function create()
     {
         return view('conferences.create');
@@ -38,6 +47,6 @@ class ConferenceController extends Controller
         ]);
 
         // Nukreipiame atgal į konferencijų sąrašą arba kitą puslapį
-        return redirect()->route('conferences.index')->with('success', 'Konferencija sėkmingai sukurta.');
+        return redirect()->route('admin.conferences.index')->with('success', 'Konferencija sėkmingai sukurta.');
     }
 }
