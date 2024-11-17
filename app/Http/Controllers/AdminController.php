@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Models\Conference;
 class AdminController extends Controller
 {
     public function index()
@@ -12,31 +13,38 @@ class AdminController extends Controller
     }
     public function indexUsers()
     {
-        return view('admin.users.index'); 
+        $users = User::all();
+        return view('admin.users.index', compact('users')); 
     }
 
     public function editUser($id)
     {
-        return view('admin.users.edit', compact('id')); 
+        $user = User::findOrFail($id); // Surandame naudotoją pagal ID
+        return view('admin.users.edit', compact('user')); 
     }
 
     public function updateUser(Request $request, $id)
     {
        
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
+            'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id, // Unikalus el. pašto adresas, išskyrus dabartinį naudotoją
         ]);
-
-      
-
-        return redirect()->route('admin.users.index')->with('success', 'Vartotojas atnaujintas sėkmingai.');
+    
+        $user = User::findOrFail($id); // Surandame naudotoją pagal ID
+        $user->name = $request->input('name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->save(); // Išsaugome atnaujintus duomenis
+    
+        return redirect()->route('admin.users.index')->with('success', 'Naudotojo duomenys atnaujinti sėkmingai!');
     }
 
     public function indexConferences()
     {
-        return view('admin.conferences.index'); 
+        $conferences = Conference::all(); // Paimame visas konferencijas
+        return view('admin.conferences.index', compact('conferences'));
     }
 
     public function createConference()
@@ -63,29 +71,43 @@ class AdminController extends Controller
 
     public function editConference($id)
     {
-        return view('admin.conferences.edit', compact('id')); 
+        $conference = Conference::findOrFail($id); // Pažymėta pagal ID
+    return view('admin.conferences.edit', compact('conference'));
     }
 
     public function updateConference(Request $request, $id)
     {
-      
+       // dd($request->all()); // Patikrinkite, kokius duomenis gaunate iš formos
+    
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'speakers' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'speakers' => 'required|string',
             'date' => 'required|date',
-            'time' => 'required',
-            'address' => 'required',
+            'address' => 'required|string|max:255',
         ]);
-
         
-
-        return redirect()->route('admin.conferences.index')->with('success', 'Konferencija atnaujinta sėkmingai.');
+        $conference = Conference::findOrFail($id);
+        $conference->title = $request->title;
+        $conference->description = $request->description;
+        $conference->speakers = $request->speakers;
+        $conference->date = $request->date;
+        $conference->address = $request->address;
+    
+        // Išsaugome pakeitimus
+        $conference->save();
+    
+        return redirect()->route('admin.conferences.index')->with('success', 'Konferencija sėkmingai atnaujinta');
     }
+    
+    
 
     public function deleteConference($id)
     {
       
+        $conference = Conference::findOrFail($id);
+        $conference->delete();
+    
         return redirect()->route('admin.conferences.index')->with('success', 'Konferencija ištrinta sėkmingai.');
     }
 }

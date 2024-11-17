@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Conference;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class ConferenceController extends Controller
 {
     public function index()
@@ -16,9 +17,15 @@ class ConferenceController extends Controller
     {
         // Rasti konferenciją pagal ID
         $conference = Conference::findOrFail($id);
-        
+        $isRegistered = false;
+        if (Auth::check()) {
+            $isRegistered = DB::table('users_conferences')
+                ->where('user_id', Auth::id())
+                ->where('conference_id', $id)
+                ->exists();
+        }
         // Perduoti konferenciją į peržiūros puslapį
-        return view('conferences.show', compact('conference'));
+        return view('conferences.show', compact('conference', 'isRegistered'));
     }
     
     public function create()

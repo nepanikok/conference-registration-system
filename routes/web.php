@@ -39,7 +39,7 @@ Route::get('/admin/conferences', [AdminController::class, 'indexConferences'])->
 Route::get('/admin/conferences/create', [AdminController::class, 'createConference'])->name('admin.conferences.create');
 Route::post('/admin/conferences/store', [AdminController::class, 'storeConference'])->name('admin.conferences.store');
 Route::get('/admin/conferences/edit/{id}', [AdminController::class, 'editConference'])->name('admin.conferences.edit');
-Route::post('/admin/conferences/update/{id}', [AdminController::class, 'updateConference'])->name('admin.conferences.update');
+Route::put('/admin/conferences/update/{id}', [AdminController::class, 'updateConference'])->name('admin.conferences.update');
 Route::delete('/admin/conferences/delete/{id}', [AdminController::class, 'deleteConference'])->name('admin.conferences.delete');
 
 Route::get('/', function () {

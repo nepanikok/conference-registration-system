@@ -26,26 +26,29 @@ class AuthController extends Controller
         // Validacija
         $request->validate([
             'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255', // Pridėkite pavardės validaciją
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
         ]);
-
+    
         // Sukuriamas naudotojas
         $user = User::create([
             'name' => $request->name,
+            'last_name' => $request->last_name, // Išsaugokite pavardę
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
+    
         // Priskiriamas "kliento" vaidmuo
         $clientRole = Role::where('name', 'klientas')->first();
         $user->roles()->attach($clientRole);
-        
+    
         // Prisijungimas po registracijos
         Auth::login($user);
-
+    
         return redirect()->route('welcome');
     }
+    
 
 
 

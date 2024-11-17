@@ -37,9 +37,15 @@ class ClientController extends Controller
         if (!$conference) {
             return redirect()->route('conferences.index')->with('error', 'Konferencija nerasta.');
         }
-    
+        $isRegistered = false;
+    if (Auth::check()) {
+        $isRegistered = DB::table('users_conferences')
+            ->where('user_id', Auth::id())
+            ->where('conference_id', $id)
+            ->exists();
+    }
         // Perduoti konferenciją į peržiūros puslapį
-        return view('client.show', compact('conference'));
+        return view('client.show', compact('conference', 'isRegistered'));
     }
     
     
