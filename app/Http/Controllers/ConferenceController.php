@@ -15,7 +15,7 @@ class ConferenceController extends Controller
     }
     public function show($id)
     {
-        // Rasti konferenciją pagal ID
+        
         $conference = Conference::findOrFail($id);
         $isRegistered = false;
         if (Auth::check()) {
@@ -24,7 +24,7 @@ class ConferenceController extends Controller
                 ->where('conference_id', $id)
                 ->exists();
         }
-        // Perduoti konferenciją į peržiūros puslapį
+       
         return view('conferences.show', compact('conference', 'isRegistered'));
     }
     
@@ -35,7 +35,7 @@ class ConferenceController extends Controller
 
     public function store(Request $request)
     {
-        // Validuojame formos duomenis
+       
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -44,7 +44,7 @@ class ConferenceController extends Controller
             'address' => 'required|string|max:255',
         ]);
 
-        // Išsaugome naują konferenciją į duomenų bazę
+        
         Conference::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -53,7 +53,7 @@ class ConferenceController extends Controller
             'address' => $request->address,
         ]);
 
-        // Nukreipiame atgal į konferencijų sąrašą arba kitą puslapį
+       
         return redirect()->route('admin.conferences.index')->with('success', 'Konferencija sėkmingai sukurta.');
     }
 }

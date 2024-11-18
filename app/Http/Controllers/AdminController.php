@@ -19,7 +19,7 @@ class AdminController extends Controller
 
     public function editUser($id)
     {
-        $user = User::findOrFail($id); // Surandame naudotoją pagal ID
+        $user = User::findOrFail($id); 
         return view('admin.users.edit', compact('user')); 
     }
 
@@ -29,21 +29,21 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id, // Unikalus el. pašto adresas, išskyrus dabartinį naudotoją
+            'email' => 'required|email|unique:users,email,' . $id, 
         ]);
     
-        $user = User::findOrFail($id); // Surandame naudotoją pagal ID
+        $user = User::findOrFail($id); 
         $user->name = $request->input('name');
         $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
-        $user->save(); // Išsaugome atnaujintus duomenis
+        $user->save(); 
     
         return redirect()->route('admin.users.index')->with('success', 'Naudotojo duomenys atnaujinti sėkmingai!');
     }
 
     public function indexConferences()
     {
-        $conferences = Conference::all(); // Paimame visas konferencijas
+        $conferences = Conference::all(); 
         return view('admin.conferences.index', compact('conferences'));
     }
 
@@ -71,13 +71,13 @@ class AdminController extends Controller
 
     public function editConference($id)
     {
-        $conference = Conference::findOrFail($id); // Pažymėta pagal ID
+        $conference = Conference::findOrFail($id);
     return view('admin.conferences.edit', compact('conference'));
     }
 
     public function updateConference(Request $request, $id)
     {
-       // dd($request->all()); // Patikrinkite, kokius duomenis gaunate iš formos
+       
     
         $request->validate([
             'title' => 'required|string|max:255',
@@ -94,7 +94,7 @@ class AdminController extends Controller
         $conference->date = $request->date;
         $conference->address = $request->address;
     
-        // Išsaugome pakeitimus
+       
         $conference->save();
     
         return redirect()->route('admin.conferences.index')->with('success', 'Konferencija sėkmingai atnaujinta');

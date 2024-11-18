@@ -10,10 +10,10 @@ class EmployeeController extends Controller
     public function index()
     {
       
-                // Gauti visas konferencijas iš duomenų bazės
+                
                 $conferences = Conference::all();
         
-                // Perduoti konferencijas į vaizdą
+               
                 return view('employee.index', compact('conferences'));
     }
 

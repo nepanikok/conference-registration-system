@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('last_name')->default('')->after('name'); // Pridėkite numatytąją reikšmę
+            $table->string('last_name')->default('')->after('name'); 
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('last_name'); // Pašalinkite pavardės stulpelį
+            $table->dropColumn('last_name'); 
         });
     }
 };

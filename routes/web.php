@@ -8,13 +8,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Middleware\RoleMiddleware;
 
-Route::get('/conferences', [ConferenceController::class, 'show'])->name('conferences.index');
-//Route::get('/conferences/{id}', [ConferenceController::class, 'show'])->name('conferences.show');
-Route::get('/conferences/{id}', [ConferenceController::class, 'show'])->name('conferences.show');
+
 
 Route::group(['middleware' => RoleMiddleware::class.':klientas'], function () {
+Route::get('/conferences', [ConferenceController::class, 'show'])->name('conferences.index');
+Route::get('/conferences/{id}', [ConferenceController::class, 'show'])->name('conferences.show');
 Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::get('/client/{id}', [ClientController::class, 'show'])->name('client.show');
+Route::post('/conferences/{conferenceId}/register', [ClientController::class, 'registerForConference'])->name('conferences.register');
 });
 Route::group(['middleware' => RoleMiddleware::class.':darbuotojas'], function () {
 Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.index');
@@ -48,7 +49,4 @@ Route::delete('/admin/conferences/delete/{id}', [AdminController::class, 'delete
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
-Route::post('/conferences/{conferenceId}/register', [ClientController::class, 'registerForConference'])->name('conferences.register');
-
 
